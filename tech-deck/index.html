@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troopod × Wellbeing 2.0 · Technology Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0B0D;--surface:#131318;--surface2:#1B1B22;--line:rgba(255,255,255,.09);--text:#F4F4F6;--text2:#9C9CAC;--text3:#5E5E68;--accent:#8B6BF7;--accent2:#7B5CF5;--accent-lt:#B49CFB;--accent-dim:rgba(139,107,247,.1);--accent-border:rgba(139,107,247,.35);--green:#4FD18B;--blue:#5FA8F5;--amber:#E8A23D;--sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',ui-monospace,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+.stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center}
+.sl{position:absolute;inset:0;padding:64px 88px 100px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
+.sl.on{opacity:1;visibility:visible}
+.sl::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 500px at 88% -10%,rgba(139,107,247,.16),transparent 60%),radial-gradient(700px 420px at -10% 110%,rgba(180,156,251,.06),transparent 60%);pointer-events:none;z-index:-1}
+.sh{margin-bottom:34px;display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.kk{font-family:var(--mono);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-lt)}
+h2{font-size:46px;line-height:1.12;letter-spacing:-.02em;margin-top:12px;max-width:1250px;font-weight:600}
+h2 em,h1 em{font-style:normal;background:linear-gradient(120deg,var(--accent-lt),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sbd{flex:1;display:flex;flex-direction:column;min-height:0}
+.sbd.mid{justify-content:center;padding-bottom:50px}
+.a{opacity:0;transform:translateY(18px)}.on .a{animation:up .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes up{to{opacity:1;transform:none}}
+.more{font-family:var(--mono);font-size:13px;color:var(--accent-lt);text-decoration:none;border:1px solid var(--accent-border);border-radius:8px;padding:8px 13px;white-space:nowrap;margin-top:4px}
+.more:hover{background:var(--accent-dim)}
+.foot{margin-top:auto;font-family:var(--mono);font-size:13.5px;color:var(--text2);line-height:1.6;padding-top:18px}
+.foot b{color:var(--text);font-weight:500}
+.call{border-left:4px solid var(--accent);padding:8px 0 8px 24px;font-size:22px;line-height:1.5;margin-top:30px;color:var(--text2)}
+.call b{color:var(--text);font-weight:600}
+
+/* cover */
+.cover{justify-content:center}
+.logos{display:flex;align-items:center;gap:14px;margin-bottom:40px;font-size:20px;color:var(--text2)}
+.logo{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:18px;box-shadow:0 0 30px rgba(139,107,247,.35)}
+.logos b{color:var(--text);font-weight:600}
+.cover h1{font-size:80px;line-height:1.04;letter-spacing:-.03em;margin:18px 0 24px;font-weight:600;max-width:1300px}
+.lead{font-size:24px;line-height:1.55;color:var(--text2);max-width:1150px;margin-bottom:46px}
+.hgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.hc{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:24px 26px;cursor:pointer;transition:border-color .2s,transform .2s}
+.hc:hover{border-color:var(--accent-border);transform:translateY(-3px)}
+.hc i{font-style:normal;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-lt)}
+.hc b{display:block;font-size:34px;margin:12px 0 8px;letter-spacing:-.02em;font-weight:600}
+.hc span{font-size:16px;line-height:1.5;color:var(--text2)}
+
+
+.agenda{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:10px}
+.agenda .hc{border:none;border-left:1px solid var(--line);background:none;border-radius:0;padding:22px 24px 6px;transform:none}
+.agenda .hc:first-child{border-left:none;padding-left:0}
+.agenda .hc b{font-size:22px;margin:8px 0 0;color:var(--text2);transition:color .2s}
+.agenda .hc:hover{transform:none}.agenda .hc:hover b{color:var(--text)}
+
+/* cards */
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cd{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:30px 30px}
+.cd.hi{border-color:var(--accent-border);background:linear-gradient(160deg,rgba(139,107,247,.13),var(--surface) 70%)}
+.cd i{font-style:normal;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-lt)}
+.cd b{display:block;font-size:27px;line-height:1.25;margin:14px 0 12px;letter-spacing:-.01em;font-weight:600}
+.cd p{font-size:18px;line-height:1.55;color:var(--text2)}
+
+/* journey */
+.jr{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;position:relative}
+.jr::before{content:"";position:absolute;top:22px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,var(--accent),rgba(255,255,255,.08))}
+.jr div{text-align:center;position:relative;padding:0 16px}
+.jr span{width:46px;height:46px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font:600 15px var(--mono);background:var(--surface2);border:1px solid var(--accent-border);color:var(--accent-lt);position:relative;z-index:1}
+.jr b{display:block;font-size:22px;font-weight:600;margin-bottom:6px}.jr p{font-size:16px;color:var(--text2);line-height:1.5}
+
+/* features */
+.fc{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:26px 28px}
+.fc.hi{border-color:var(--accent-border);background:linear-gradient(160deg,rgba(139,107,247,.13),var(--surface) 70%)}
+.fc>i{font-style:normal;font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.fr{padding:13px 0;border-top:1px solid var(--line);font-size:16.5px;color:var(--text2);line-height:1.45}
+.fr:first-of-type{border-top:none;margin-top:10px}
+.fr b{display:block;color:var(--text);font-size:18.5px;font-weight:600;margin-bottom:2px}
+
+/* tiles */
+.t6{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tl{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:26px 28px}
+.tl span,.rc span{font:600 20px var(--mono);color:var(--accent-lt)}
+.tl b{display:block;font-size:23px;line-height:1.3;margin:10px 0 8px;font-weight:600}
+.tl p{font-size:17px;line-height:1.5;color:var(--text2)}
+.r8{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rc{border:1px solid var(--line);border-top:3px solid var(--accent);background:var(--surface);border-radius:16px;padding:22px 24px}
+.rc b{display:block;font-size:20.5px;line-height:1.3;margin:8px 0 8px;font-weight:600}
+.rc p{font-size:15.5px;line-height:1.5;color:var(--text2)}
+
+/* diagrams */
+svg.dg{display:block;width:100%;height:auto}
+.dg .b{fill:#15151B;stroke:rgba(255,255,255,.14)}
+.dg .ba{fill:rgba(139,107,247,.13);stroke:rgba(139,107,247,.55)}
+.dg .bd{fill:rgba(255,255,255,.01);stroke:rgba(255,255,255,.26);stroke-dasharray:4 3}
+.dg .bg{fill:rgba(79,209,139,.08);stroke:rgba(79,209,139,.42)}
+.dg .bn{fill:rgba(255,255,255,.02);stroke:rgba(255,255,255,.07)}
+.dg .l{font-family:var(--mono);font-size:9.5px;fill:#B49CFB;letter-spacing:1px}
+.dg .lg{font-family:var(--mono);font-size:9.5px;fill:#80808E;letter-spacing:.8px}
+.dg .tt{font-family:var(--sans);font-size:12px;font-weight:600;fill:#F4F4F6}
+.dg .tm{font-family:var(--sans);font-size:11px;font-weight:500;fill:#D6D6DE}
+.dg .ts{font-family:var(--sans);font-size:10.5px;fill:#9494A2}
+.dg .ar{stroke:#8B6BF7;stroke-width:1.4;fill:none}
+.dg .ag{stroke:#4FD18B;stroke-width:1.4;fill:none}
+.dg .ad{stroke:rgba(255,255,255,.3);stroke-width:1.1;fill:none;stroke-dasharray:3 3}
+.dg g.grp{transition:opacity .35s ease}
+.on .dg .ar,.on .dg .ag{stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.2s ease forwards .4s}
+.on .dg .ag[style*="dasharray"]{stroke-dasharray:4 3;stroke-dashoffset:0;animation:none}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* nn stepper */
+.nnw{display:grid;grid-template-columns:1fr 340px;gap:34px;align-items:start}
+.stps{display:flex;flex-direction:column;gap:8px}
+.stp{all:unset;cursor:pointer;display:flex;gap:14px;align-items:center;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font-size:17px;color:var(--text2);background:var(--surface);transition:all .2s}
+.stp span{font:500 13px var(--mono);color:var(--text3);width:22px}
+.stp:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.stp.cur{color:var(--text);border-color:var(--accent-border);background:var(--accent-dim)}
+.stp.cur span{color:var(--accent-lt)}
+.exp{margin-top:18px;border:1px solid var(--accent-border);background:linear-gradient(160deg,rgba(139,107,247,.12),var(--surface) 75%);border-radius:16px;padding:22px 24px;font-size:17.5px;line-height:1.6;color:var(--text2);min-height:190px}
+.exp b{display:block;color:var(--text);font-size:20px;margin-bottom:8px;font-weight:600}
+
+/* decide vs talk */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:22px}
+.vs .cd b{font-size:30px}
+.vs ul{list-style:none;margin-top:6px}.vs li{font-size:18px;color:var(--text2);padding:7px 0 7px 26px;position:relative;line-height:1.45}
+.vs li::before{content:"";position:absolute;left:2px;top:15px;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.vs .lm li::before{background:var(--text3)}
+
+/* process */
+.pr7{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.ps{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:20px 18px;position:relative}
+.ps span{font:600 15px var(--mono);color:var(--accent-lt)}
+.ps b{display:block;font-size:18px;line-height:1.3;margin:8px 0 6px;font-weight:600}
+.ps p{font-size:14.5px;line-height:1.45;color:var(--text2)}
+.subk{font-family:var(--mono);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin:34px 0 14px}
+
+/* phones slide */
+.pw{display:grid;grid-template-columns:380px 1fr;gap:40px;height:100%}
+.pw .left{display:flex;flex-direction:column;padding-top:4px}
+.pw h2{font-size:44px}
+.pw .ptxt{font-size:19px;line-height:1.6;color:var(--text2);margin-top:22px}
+.pw .pill{display:inline-block;margin-top:24px;font:500 13px var(--mono);color:var(--amber);border:1px solid rgba(232,162,61,.4);background:rgba(232,162,61,.08);border-radius:7px;padding:7px 12px;align-self:flex-start}
+.pw .phones{gap:26px;margin-top:-4px}
+/* phones */
+  .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:14px;}
+  .phw{display:flex;flex-direction:column;align-items:center;}
+  .ph{width:100%;max-width:286px;background:#08080A;border:1px solid rgba(255,255,255,.14);border-radius:40px;padding:9px;box-shadow:0 40px 70px -35px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.6) inset;}
+  .scr{background:#F3F0E8;border-radius:32px;overflow:hidden;color:#17332B;font-size:11px;line-height:1.4;height:590px;position:relative;display:flex;flex-direction:column;}
+  .sb{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 6px;font-weight:600;font-size:11px;}
+  .sb .isl{width:76px;height:20px;background:#08080A;border-radius:12px;}
+  .scr .pad{padding:4px 16px 0;flex:1;overflow:hidden;}
+  .s-top{display:flex;justify-content:space-between;align-items:flex-end;margin:4px 0 12px;}
+  .s-top .hi{font-size:16px;font-weight:600;letter-spacing:-.3px;}
+  .s-top .sub{font-size:10.5px;color:#6B7D76;}
+  .av{width:30px;height:30px;border-radius:50%;background:#D9E6D3;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:11px;color:#2E5A48;}
+  .g-card{background:#17332B;color:#F3F0E8;border-radius:18px;padding:14px;display:flex;gap:12px;align-items:center;}
+  .g-card .gs{font-size:10px;color:#A9C2B6;}
+  .w-card{background:#fff;border-radius:16px;padding:12px 13px;margin-top:10px;box-shadow:0 1px 0 rgba(23,51,43,.06);}
+  .w-h{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:11.5px;margin-bottom:8px;}
+  .w-h span{font-weight:500;color:#6B7D76;font-size:10px;}
+  .pr{display:grid;grid-template-columns:62px 1fr 20px;gap:8px;align-items:center;font-size:10.5px;margin:5px 0;}
+  .pr .tr{height:6px;border-radius:3px;background:#ECE7DC;overflow:hidden;} .pr .tr i{display:block;height:100%;border-radius:3px;}
+  .pr b{font-weight:600;text-align:right;}
+  .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+  .mini div{background:#fff;border-radius:14px;padding:10px;font-size:9.5px;color:#6B7D76;}
+  .mini b{display:block;font-size:13px;color:#17332B;margin-top:3px;}
+  .tabs{display:flex;justify-content:space-around;padding:10px 8px 16px;border-top:1px solid #E5E0D4;background:#F8F6F0;font-size:9.5px;color:#8A9A93;}
+  .tabs .on{color:#17332B;font-weight:600;}
+  .chip-s{display:inline-block;font-size:9px;font-weight:600;padding:3px 8px;border-radius:20px;}
+  .act{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px solid #EFEBE2;}
+  .act:first-of-type{border-top:none;}
+  .cb{width:16px;height:16px;border-radius:5px;border:1.5px solid #9FB3AA;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;}
+  .cb.on{background:#2E7D5B;border-color:#2E7D5B;}
+  .act .at{font-weight:600;font-size:11px;} .act .as{font-size:9.5px;color:#6B7D76;margin-top:2px;}
+  .why{background:#EEF4EA;border:1px solid #D3E3CB;border-radius:12px;padding:9px 10px;margin:2px 0 4px 26px;font-size:9.8px;color:#2E4A40;line-height:1.45;}
+  .why b{font-weight:600;}
+  .bub{max-width:85%;padding:8px 10px;border-radius:14px;font-size:10px;margin-top:7px;line-height:1.4;}
+  .bub.u{background:#17332B;color:#F3F0E8;margin-left:auto;border-bottom-right-radius:4px;}
+  .bub.a{background:#fff;border-bottom-left-radius:4px;}
+  .ask{margin:8px 0 0;background:#fff;border-radius:20px;padding:8px 12px;font-size:10px;color:#9AA8A2;display:flex;justify-content:space-between;}
+  .ph-cap{max-width:286px;margin-top:14px;}
+  .ph-cap .k{font:500 10px 'DM Mono',monospace;color:var(--accent-lt);letter-spacing:1px;text-transform:uppercase;}
+  .ph-cap p{font-size:12.5px;color:var(--text2);margin-top:4px;line-height:1.55;}
+
+  
+.phones{display:grid;grid-template-columns:repeat(3,1fr)}
+.ph-cap .k{font-size:12px}.ph-cap p{font-size:14px}
+
+
+/* flow (slide 10) */
+.flow{display:grid;grid-template-columns:1fr 54px 1.35fr 54px 1fr 54px 1.35fr 54px 1fr;align-items:stretch}
+.fn2{padding:24px 0 0;border-top:2px solid rgba(255,255,255,.14)}
+.fn2 i{font-style:normal;font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text3)}
+.fn2 b{display:block;font-size:26px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
+.fn2 span{display:block;font-size:16.5px;line-height:1.5;color:var(--text2)}
+.fn2.main{border-top:4px solid var(--accent)}
+.fn2.main i{color:var(--accent-lt)} .fn2.main b{font-size:34px;background:linear-gradient(120deg,var(--accent-lt),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fn2.talk{border-top:2px dashed rgba(255,255,255,.28)} .fn2.talk b{color:var(--text2)}
+.fa{position:relative}
+.fa::before{content:"";position:absolute;left:10px;right:14px;top:-1px;height:2px;background:var(--accent)}
+.fa::after{content:"";position:absolute;right:8px;top:-6px;border:6px solid transparent;border-left:9px solid var(--accent);border-right:0}
+.fa.dim::before{background:rgba(255,255,255,.25)} .fa.dim::after{border-left-color:rgba(255,255,255,.35)}
+.lrn{display:grid;grid-template-columns:repeat(3,1fr);gap:60px}
+.lrn span{font:600 44px var(--mono);color:rgba(180,156,251,.35);letter-spacing:-.02em}
+.lrn b{display:block;font-size:23px;font-weight:600;margin:6px 0 8px}
+.lrn p{font-size:17px;line-height:1.55;color:var(--text2)}
+
+/* timeline (slide 11) */
+.tline{display:grid;grid-template-columns:repeat(7,1fr);gap:22px;position:relative;padding-top:40px}
+.tline::before{content:"";position:absolute;top:18px;left:18px;right:40px;height:2px;background:linear-gradient(90deg,var(--accent),rgba(255,255,255,.1))}
+.tline div{position:relative}
+.tline span{position:absolute;top:-40px;left:0;width:38px;height:38px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font:600 13px var(--mono);color:var(--accent-lt)}
+.tline b{display:block;font-size:20px;font-weight:600;margin:20px 0 6px;line-height:1.25}
+.tline p{font-size:15.5px;line-height:1.5;color:var(--text2)}
+.band{display:grid;grid-template-columns:1fr 1fr 1fr;height:58px;border-radius:14px;overflow:hidden}
+.seg{display:flex;align-items:center;padding:0 24px}
+.seg b{font:600 15px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.s1{background:linear-gradient(90deg,#6C4FE0,#8B6BF7)} .s2{background:linear-gradient(90deg,rgba(139,107,247,.55),rgba(95,168,245,.55))} .s3{background:linear-gradient(90deg,rgba(95,168,245,.35),rgba(79,209,139,.4))}
+.bandt{display:grid;grid-template-columns:1fr 1fr 1fr}
+.bandt p{font-size:17.5px;line-height:1.55;color:var(--text2);padding:18px 24px 0;border-left:1px solid var(--line)}
+.bandt p:first-child{border-left:none}
+
+/* recs list (slide 12) */
+.rl{display:grid;grid-template-columns:1fr 1fr;column-gap:80px}
+.rl>div{display:flex;gap:26px;padding:22px 0;border-bottom:1px solid var(--line)}
+.rl span{font:600 30px var(--mono);color:var(--accent-lt);min-width:52px;line-height:1.1}
+.rl b{display:block;font-size:23px;font-weight:600;margin-bottom:6px}
+.rl p{font-size:17px;line-height:1.5;color:var(--text2)}
+
+/* final (slide 13) */
+.fin{display:grid;grid-template-columns:1.15fr 1fr;gap:90px;height:100%;align-items:center}
+.fin h2{font-size:48px}
+.who{margin-top:38px}
+.who>div{padding:20px 0;border-top:1px solid var(--line)}
+.who i{font-style:normal;font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-lt)}
+.who p{font-size:19px;line-height:1.55;color:var(--text2);margin-top:8px}
+.who p b{color:var(--text);font-weight:600}
+.nx{border-left:1px solid var(--line);padding-left:70px}
+.vst{margin-top:26px;position:relative}
+.vst::before{content:"";position:absolute;left:19px;top:20px;bottom:30px;width:2px;background:linear-gradient(180deg,var(--accent),rgba(255,255,255,.08))}
+.vst>div{display:flex;gap:22px;align-items:flex-start;padding:12px 0;position:relative}
+.vst span{width:40px;height:40px;flex:none;border-radius:50%;background:var(--bg);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font:600 15px var(--mono);color:var(--accent-lt)}
+.vst b{display:block;font-size:22px;font-weight:600;margin-top:6px}
+.vst p{font-size:16.5px;color:var(--text2);margin-top:3px}
+.then{font-size:18px;line-height:1.55;color:var(--text2);margin-top:26px}
+.ctc{display:flex;gap:14px;align-items:center;margin-top:30px}
+.ctc b{display:block;font-size:17px}.ctc span{font:500 14px var(--mono);color:var(--accent-lt)}
+
+
+/* heard vs means (slide 6) */
+.hw{width:100%}
+.hw-h,.hw-r{display:grid;grid-template-columns:60px 1fr 70px 1.1fr;align-items:center}
+.hw-h span{font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text3);padding-bottom:14px}
+.hw-h span:last-child{color:var(--accent-lt)}
+.hw-r{border-top:1px solid var(--line);padding:21px 0}
+.hw-r:last-child{border-bottom:1px solid var(--line)}
+.hw-r span{font:600 15px var(--mono);color:var(--text3)}
+.hw-r .hd{font-size:19px;line-height:1.45;color:var(--text2);padding-right:20px}
+.hw-r i{font-style:normal;font-size:24px;color:var(--accent);text-align:center}
+.hw-r .mn{font-size:21px;line-height:1.45;color:var(--text)}
+.hw-r .mn b{font-weight:600;color:var(--accent-lt)}
+
+/* bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:linear-gradient(0deg,rgba(11,11,13,.96),rgba(11,11,13,.6));z-index:10}
+.dots{display:flex;gap:7px;align-items:center}
+.dot{width:9px;height:9px;border-radius:5px;background:rgba(255,255,255,.18);cursor:pointer;transition:all .25s;border:none}
+.dot.on{width:28px;background:var(--accent-lt)}
+.ctl{display:flex;gap:10px;align-items:center;font:500 13px var(--mono);color:var(--text2)}
+.ctl button,.ctl a{all:unset;cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:7px 12px;color:var(--text2)}
+.ctl button:hover,.ctl a:hover{color:var(--text);border-color:var(--accent-border)}
+#prog{position:fixed;top:0;left:0;height:3px;background:var(--accent-lt);transition:width .4s;z-index:10}
+@media (prefers-reduced-motion:reduce){.a,.on .a{animation:none;opacity:1;transform:none}.sl{transition:none}.on .dg .ar,.on .dg .ag{animation:none;stroke-dasharray:none}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="stage" id="stage">
+
+<!-- 1 COVER -->
+<section class="sl cover">
+  <div class="logos a"><div class="logo">T</div><b>Troopod</b> <span>×</span> Wellbeing Nutrition</div>
+  <div class="kk a" style="--d:.08s">Wellbeing 2.0 · Technology proposal</div>
+  <h1 class="a" style="--d:.15s">Engineering the foundation for <em>Wellbeing 2.0</em></h1>
+  <p class="lead a" style="--d:.25s">How we understand Wellbeing 2.0, how we would build it, and what we recommend so it launches as a finished product and keeps growing from there.</p>
+  <div class="agenda">
+    <div class="hc a" style="--d:.35s" data-go="2"><i>01</i><b>Goal and vision</b></div>
+    <div class="hc a" style="--d:.41s" data-go="4"><i>02</i><b>What we're building</b></div>
+    <div class="hc a" style="--d:.47s" data-go="7"><i>03</i><b>Product concepts</b></div>
+    <div class="hc a" style="--d:.53s" data-go="8"><i>04</i><b>Way to build</b></div>
+    <div class="hc a" style="--d:.59s" data-go="12"><i>05</i><b>Recommendations</b></div>
+  </div>
+</section>
+
+<!-- 2 GOAL -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">01 · Goal</div><h2 class="a" style="--d:.08s">A complete product from the first release, on a foundation that keeps growing</h2></div></div>
+  <div class="sbd mid">
+    <div class="c3">
+      <div class="cd a" style="--d:.2s"><i>Launch</i><b>A finished product, not a beta</b><p>Every journey, data source and recommendation working together from day one. The brand's equity stays protected.</p></div>
+      <div class="cd hi a" style="--d:.28s"><i>Core</i><b>TrooCore at the centre</b><p>All health data processed by our neural networks into one living profile of each person.</p></div>
+      <div class="cd a" style="--d:.36s"><i>Future</i><b>Built to grow</b><p>New data types, markers and models plug in without a rebuild, from genetics to imaging.</p></div>
+    </div>
+    <div class="call a" style="--d:.5s">Every later phase <b>adds to the platform</b>. Nothing built first is rebuilt later.</div>
+  </div>
+</section>
+
+<!-- 3 VISION -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">02 · Vision</div><h2 class="a" style="--d:.08s">TrooCore: every input in, one living profile, everything out</h2></div></div>
+  <div class="sbd">
+    <div class="a" style="--d:.2s;max-width:1250px;margin:0 auto;width:100%"><svg class="dg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="v1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8B6BF7"/></marker></defs>
+  <text class="lg" x="10" y="26">WHAT GOES IN</text>
+  <rect class="b" x="10" y="40" width="190" height="48" rx="9"/><text class="tt" x="24" y="61">Lab reports</text><text class="ts" x="24" y="77">Blood biomarkers, partner labs</text>
+  <rect class="b" x="10" y="98" width="190" height="48" rx="9"/><text class="tt" x="24" y="119">Wearables</text><text class="ts" x="24" y="135">Sleep, HRV, activity, heart rate</text>
+  <rect class="b" x="10" y="156" width="190" height="48" rx="9"/><text class="tt" x="24" y="177">Face and body scans</text><text class="ts" x="24" y="193">Vitals, skin, posture</text>
+  <rect class="b" x="10" y="214" width="190" height="48" rx="9"/><text class="tt" x="24" y="235">Food photos</text><text class="ts" x="24" y="251">Macros, glycemic impact</text>
+  <rect class="b" x="10" y="272" width="190" height="48" rx="9"/><text class="tt" x="24" y="293">Check ins</text><text class="ts" x="24" y="309">Mood, stress, goals, habits</text>
+
+  <path class="ar" d="M201 64 C 250 64, 250 170, 286 176" marker-end="url(#v1)"/>
+  <path class="ar" d="M201 122 C 245 122, 250 176, 286 180" marker-end="url(#v1)"/>
+  <path class="ar" d="M201 180 H286" marker-end="url(#v1)"/>
+  <path class="ar" d="M201 238 C 245 238, 250 184, 286 184" marker-end="url(#v1)"/>
+  <path class="ar" d="M201 296 C 250 296, 250 190, 286 188" marker-end="url(#v1)"/>
+
+  <rect class="ba" x="290" y="40" width="320" height="280" rx="18"/>
+  <text class="l" x="450" y="66" text-anchor="middle">HEALTH INTELLIGENCE ENGINE · BY TROOPOD</text>
+  <text x="450" y="96" text-anchor="middle" style="font-family:'DM Sans';font-size:21px;font-weight:600;fill:#F4F4F6">TrooCore</text>
+  <rect class="b" x="312" y="116" width="276" height="34" rx="8"/><text class="tm" x="326" y="138">Processes every data point</text>
+  <rect class="b" x="312" y="158" width="276" height="34" rx="8"/><text class="tm" x="326" y="180">Neural networks learn each person</text>
+  <rect class="b" x="312" y="200" width="276" height="34" rx="8"/><text class="tm" x="326" y="222">Tracks change over time</text>
+  <rect class="b" x="312" y="242" width="276" height="34" rx="8"/><text class="tm" x="326" y="264">One living profile per user</text>
+  <text class="ts" x="450" y="302" text-anchor="middle">Physical · Mental · Emotional · Social · Spiritual</text>
+
+  <path class="ar" d="M611 176 C 650 170, 650 64, 696 64" marker-end="url(#v1)"/>
+  <path class="ar" d="M611 178 C 650 176, 650 122, 696 122" marker-end="url(#v1)"/>
+  <path class="ar" d="M611 180 H696" marker-end="url(#v1)"/>
+  <path class="ar" d="M611 182 C 650 184, 650 238, 696 238" marker-end="url(#v1)"/>
+  <path class="ar" d="M611 184 C 650 190, 650 296, 696 296" marker-end="url(#v1)"/>
+
+  <text class="lg" x="700" y="26">WHAT COMES OUT</text>
+  <rect class="bg" x="700" y="40" width="190" height="48" rx="9"/><text class="tt" x="714" y="61">Wellbeing score</text><text class="ts" x="714" y="77">Across the five pillars</text>
+  <rect class="bg" x="700" y="98" width="190" height="48" rx="9"/><text class="tt" x="714" y="119">Daily protocol</text><text class="ts" x="714" y="135">Food, movement, rest, mind</text>
+  <rect class="bg" x="700" y="156" width="190" height="48" rx="9"/><text class="tt" x="714" y="177">Supplement stack</text><text class="ts" x="714" y="193">Personal, from the store</text>
+  <rect class="bg" x="700" y="214" width="190" height="48" rx="9"/><text class="tt" x="714" y="235">Workout plans</text><text class="ts" x="714" y="251">Adapted to recovery</text>
+  <rect class="bg" x="700" y="272" width="190" height="48" rx="9"/><text class="tt" x="714" y="293">Insights</text><text class="ts" x="714" y="309">Trends in plain language</text>
+
+  <path class="ag" d="M795 321 V362 H105 V322" marker-end="url(#v1)" style="stroke-dasharray:4 3"/>
+  <text class="lg" x="450" y="384" text-anchor="middle">WHAT THE USER DOES GOES BACK IN · TROOCORE KEEPS LEARNING</text>
+</svg></div>
+    <div class="foot a" style="--d:.4s"><b>Wellness, not fear.</b> The data comes from medical science, but TrooCore speaks the language of wellness: calm ranges, clear next steps, nothing that reads like a diagnosis.</div>
+  </div>
+</section>
+
+<!-- 4 WHAT WE'RE BUILDING -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">03 · What we're building</div><h2 class="a" style="--d:.08s">Not an app that calls APIs. A health data platform with an app on top.</h2></div></div>
+  <div class="sbd mid">
+    <div class="c4">
+      <div class="cd hi a" style="--d:.2s"><i>The app</i><b>iOS and Android</b><p>All locked screens and journeys, including the supplement store.</p></div>
+      <div class="cd hi a" style="--d:.27s"><i>TrooCore data engine</i><b>Where data is processed</b><p>Every source checked, standardised and kept as full history.</p></div>
+      <div class="cd hi a" style="--d:.34s"><i>Intelligence</i><b>Neural networks</b><p>Our own multimodal models that decide what goes into each plan.</p></div>
+      <div class="cd hi a" style="--d:.41s"><i>Admin console</i><b>Control for your team</b><p>Customise data points, ranges and rules without code changes.</p></div>
+    </div>
+    <div class="jr">
+      <div class="a" style="--d:.5s"><span>01</span><b>Measure</b><p>Reports, scans, food, wearables, check ins</p></div>
+      <div class="a" style="--d:.58s"><span>02</span><b>Baseline</b><p>TrooCore shows where they stand today</p></div>
+      <div class="a" style="--d:.66s"><span>03</span><b>Plan</b><p>A daily protocol built for them</p></div>
+      <div class="a" style="--d:.74s"><span>04</span><b>Act and adapt</b><p>Buy, track, and the plan updates</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 CORE FEATURES -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">04 · Core features</div><h2 class="a" style="--d:.08s">Every feature connects to TrooCore</h2></div></div>
+  <div class="sbd mid">
+    <div class="c3">
+      <div class="fc a" style="--d:.2s"><i style="color:var(--blue)">Feeds TrooCore</i>
+        <div class="fr"><b>Biomarkers</b>Reports, partner labs, cards by system</div>
+        <div class="fr"><b>Wearables</b>Apple Health, Health Connect, Oura, Whoop, Ultrahuman, Fitbit</div>
+        <div class="fr"><b>Scans and food</b>Face, body, vitals; meal photos and macros</div>
+        <div class="fr"><b>Check ins</b>Mental, emotional, social and spiritual pillars</div>
+      </div>
+      <div class="fc hi a" style="--d:.28s"><i style="color:var(--accent-lt)">Comes from TrooCore</i>
+        <div class="fr"><b>Unified dashboard</b>Wellbeing score across five pillars</div>
+        <div class="fr"><b>Daily protocol</b>Every action with a "why this"</div>
+        <div class="fr"><b>Workouts and stack</b>Adaptive plans, personal supplements</div>
+        <div class="fr"><b>Insights</b>Trends and weekly summaries</div>
+      </div>
+      <div class="fc a" style="--d:.36s"><i style="color:var(--green)">Around TrooCore</i>
+        <div class="fr"><b>Onboarding and consent</b>Consent per data type</div>
+        <div class="fr"><b>AI assistant and AI Doctor</b>Conversation, referral to clinicians</div>
+        <div class="fr"><b>Rewards and Tribe</b>Challenges, points, community</div>
+        <div class="fr"><b>Settings and privacy</b>Export, delete, medications, allergies</div>
+      </div>
+    </div>
+    <div class="call a" style="--d:.5s"><b>Customisable data points.</b> New markers, ranges, sources and rules can be added from the admin console, without a new app release.</div>
+  </div>
+</section>
+
+<!-- 6 UNDERSTANDING -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">05 · Our understanding</div><h2 class="a" style="--d:.08s">What we heard, and what it means for the build</h2></div></div>
+  <div class="sbd mid">
+    <div class="hw">
+      <div class="hw-h a" style="--d:.12s"><span></span><span>What we heard</span><span></span><span>What it means for the build</span></div>
+      <div class="hw-r a" style="--d:0.18s"><span>01</span><p class="hd">Design, product and user journeys are locked, across 400 to 500 screens.</p><i>→</i><p class="mn">We build them faithfully and stitch every journey into <b>one product</b>.</p></div>
+      <div class="hw-r a" style="--d:0.25s"><span>02</span><p class="hd">Five to six APIs have to work together without failing.</p><i>→</i><p class="mn">TrooCore brings every source into <b>one shape</b> before anything is scored.</p></div>
+      <div class="hw-r a" style="--d:0.32s"><span>03</span><p class="hd">The team building it has to understand health, not just code.</p><i>→</i><p class="mn">Health data literacy sits <b>inside our tech team</b>, not outside it.</p></div>
+      <div class="hw-r a" style="--d:0.39s"><span>04</span><p class="hd">No beta. The brand's equity cannot be compromised.</p><i>→</i><p class="mn">Data checks, expert review and UAT are <b>built into the plan</b>.</p></div>
+      <div class="hw-r a" style="--d:0.46s"><span>05</span><p class="hd">Genetic, gut, imaging and neuro data come in later phases.</p><i>→</i><p class="mn">The foundation lets new data <b>plug in without a rebuild</b>.</p></div>
+      <div class="hw-r a" style="--d:0.53s"><span>06</span><p class="hd">Part of the work is already in development with a partner.</p><i>→</i><p class="mn">A <b>planned handover</b>, so nothing done so far is lost.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 PRODUCT -->
+<section class="sl">
+  <div class="pw">
+    <div class="left">
+      <div class="kk a">06 · Product concepts</div>
+      <h2 class="a" style="--d:.08s">How TrooCore shows up for the user</h2>
+      <p class="ptxt a" style="--d:.16s">One score with its confidence. A biomarker in plain language. A daily plan that explains itself.</p>
+      <div class="pill a" style="--d:.24s">Illustrative concepts · the build follows your locked designs</div>
+    </div>
+    <div class="a" style="--d:.2s"><div class="phones">
+    <!-- phone 1 dashboard -->
+    <div class="phw">
+      <div class="ph"><div class="scr">
+        <div class="sb"><span>9:41</span><span class="isl"></span><span>●●●</span></div>
+        <div class="pad">
+          <div class="s-top"><div><div class="sub">Monday, 3 Nov</div><div class="hi">Good morning, Aarav</div></div><div class="av">A</div></div>
+          <div class="g-card">
+            <svg width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="31" fill="none" stroke="rgba(243,240,232,.15)" stroke-width="7"/><circle cx="38" cy="38" r="31" fill="none" stroke="#9BD27A" stroke-width="7" stroke-linecap="round" stroke-dasharray="140 195" transform="rotate(-90 38 38)"/><text x="38" y="43" text-anchor="middle" font-family="DM Sans" font-size="20" font-weight="600" fill="#F3F0E8">72</text></svg>
+            <div><div style="font-weight:600;font-size:12.5px">Wellbeing score</div><div class="gs" style="margin-top:3px">Up 4 since last month</div><div class="gs" style="margin-top:6px;color:#C9DDB9">Confidence: good · 4 of 5 sources</div></div>
+          </div>
+          <div class="w-card">
+            <div class="w-h">Your five pillars <span>This week</span></div>
+            <div class="pr"><span>Physical</span><span class="tr"><i style="width:78%;background:#2E7D5B"></i></span><b>78</b></div>
+            <div class="pr"><span>Mental</span><span class="tr"><i style="width:64%;background:#4F8FB8"></i></span><b>64</b></div>
+            <div class="pr"><span>Emotional</span><span class="tr"><i style="width:70%;background:#7BAF6E"></i></span><b>70</b></div>
+            <div class="pr"><span>Social</span><span class="tr"><i style="width:58%;background:#C99A45"></i></span><b>58</b></div>
+            <div class="pr"><span>Spiritual</span><span class="tr"><i style="width:66%;background:#B57A9C"></i></span><b>66</b></div>
+          </div>
+          <div class="w-card">
+            <div class="w-h">Today's plan <span>3 of 6 done</span></div>
+            <div style="height:6px;border-radius:3px;background:#ECE7DC;overflow:hidden"><i style="display:block;width:50%;height:100%;background:#2E7D5B;border-radius:3px"></i></div>
+            <div style="margin-top:8px;font-size:10.5px;color:#4A5F57">Next: <b style="color:#17332B">30 min easy walk</b> · before 7 pm</div>
+          </div>
+          <div class="mini">
+            <div>Sleep<b>6h 50m</b></div>
+            <div>HRV<b>48 ms</b></div>
+            <div>Steps<b>6,240</b></div>
+          </div>
+        </div>
+        <div class="tabs"><span class="on">Home</span><span>Insights</span><span>Plan</span><span>Store</span><span>You</span></div>
+      </div></div>
+      <div class="ph-cap"><div class="k">Unified dashboard</div><p>One score across the five pillars, with its confidence shown openly. Missing sources lower confidence instead of hiding the score.</p></div>
+    </div>
+
+    <!-- phone 2 biomarker -->
+    <div class="phw">
+      <div class="ph"><div class="scr">
+        <div class="sb"><span>9:41</span><span class="isl"></span><span>●●●</span></div>
+        <div class="pad">
+          <div style="font-size:10.5px;color:#6B7D76;margin:4px 0 6px">‹ Insights · Nutrients</div>
+          <div style="font-size:16px;font-weight:600;letter-spacing:-.3px">Vitamin D</div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span style="font-size:26px;font-weight:600;letter-spacing:-.6px">18</span><span style="color:#6B7D76">ng/mL</span><span class="chip-s" style="background:#F6E7C8;color:#8A5A12;margin-left:auto">Below range</span></div>
+          <div style="margin-top:12px;position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,#E9C98B 0 20%,#F3DDAF 20% 30%,#BFDDB0 30% 100%)"><span style="position:absolute;left:18%;top:-4px;width:4px;height:16px;border-radius:2px;background:#17332B"></span></div>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#8A9A93;margin-top:4px"><span>Low, under 20</span><span>20 to 29</span><span>Sufficient, 30 to 100</span></div>
+          <div class="w-card">
+            <div class="w-h">Your trend <span>Last 4 tests</span></div>
+            <svg viewBox="0 0 230 80" width="100%" height="80"><rect x="0" y="14" width="230" height="34" fill="#E3EEDB" opacity=".6"/><polyline points="15,66 85,58 155,42 215,52" fill="none" stroke="#17332B" stroke-width="2"/><circle cx="15" cy="66" r="3" fill="#17332B"/><circle cx="85" cy="58" r="3" fill="#17332B"/><circle cx="155" cy="42" r="3" fill="#17332B"/><circle cx="215" cy="52" r="4" fill="#C9862B"/><text x="15" y="78" font-size="8" fill="#8A9A93" text-anchor="middle" font-family="DM Sans">Jan</text><text x="85" y="78" font-size="8" fill="#8A9A93" text-anchor="middle" font-family="DM Sans">Apr</text><text x="155" y="78" font-size="8" fill="#8A9A93" text-anchor="middle" font-family="DM Sans">Jul</text><text x="215" y="78" font-size="8" fill="#8A9A93" text-anchor="middle" font-family="DM Sans">Oct</text></svg>
+          </div>
+          <div class="w-card">
+            <div class="w-h">What it means</div>
+            <div style="font-size:10.5px;color:#4A5F57;line-height:1.5">Vitamin D supports bone health, muscle function and immunity. Yours is below the sufficient range, which is very common in India. Small, steady changes usually bring it up.</div>
+          </div>
+          <div class="w-card">
+            <div class="w-h">What you can do</div>
+            <div style="font-size:10.5px;line-height:1.9">☀ Some sun on your arms and face, most days<br>◐ Vitamin D3 with your largest meal<br>↻ Retest in 12 weeks</div>
+          </div>
+          <div style="font-size:9px;color:#8A9A93;margin-top:8px">Source: partner lab report, 23 Oct</div>
+        </div>
+        <div class="tabs"><span>Home</span><span class="on">Insights</span><span>Plan</span><span>Store</span><span>You</span></div>
+      </div></div>
+      <div class="ph-cap"><div class="k">Biomarker insight</div><p>Standardised value, the reference range, trend across reports, and the source. Calm language: below range, not abnormal.</p></div>
+    </div>
+
+    <!-- phone 3 protocol -->
+    <div class="phw">
+      <div class="ph"><div class="scr">
+        <div class="sb"><span>9:41</span><span class="isl"></span><span>●●●</span></div>
+        <div class="pad">
+          <div class="s-top" style="margin-bottom:8px"><div><div class="hi">Today's protocol</div><div class="sub">From your labs, sleep and goals</div></div></div>
+          <div class="w-card" style="padding:6px 13px">
+            <div class="act"><span class="cb on">✓</span><div><div class="at">15 min of sunlight</div><div class="as">Physical · done 11:20 am</div></div></div>
+            <div class="act"><span class="cb on">✓</span><div><div class="at">Vitamin D3 with lunch</div><div class="as">Nutrition · done</div></div></div>
+            <div class="act"><span class="cb"></span><div><div class="at">30 min easy walk</div><div class="as">Physical · swapped from your run</div></div></div>
+            <div class="why"><b>Why this?</b> You slept 5h 40m and your HRV is 12% below your usual. An easy walk keeps you moving without adding strain.<div style="margin-top:4px;color:#6B8579">Based on: sleep, last 7 nights · HRV baseline</div></div>
+            <div class="act"><span class="cb"></span><div><div class="at">5 min breathing before bed</div><div class="as">Mental</div></div></div>
+          </div>
+          <div class="bub u">Can I still run tomorrow?</div>
+          <div class="bub a">If you sleep 7 hours or more tonight, yes. I'll check your recovery in the morning and update the plan.</div>
+          <div class="ask"><span>Ask about your plan</span><span>↑</span></div>
+        </div>
+        <div class="tabs"><span>Home</span><span>Insights</span><span class="on">Plan</span><span>Store</span><span>You</span></div>
+      </div></div>
+      <div class="ph-cap"><div class="k">AI protocol assistant</div><p>Each action shows why it is there and the data behind it. The plan comes from our models; the assistant is only the conversation around it.</p></div>
+    </div>
+  </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- 8 WAY TO BUILD -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">A simple shape that can grow</h2></div></div>
+  <div class="sbd">
+    <div class="a" style="--d:.2s;max-width:1300px;margin:0 auto;width:100%"><svg class="dg" viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="w1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8B6BF7"/></marker></defs>
+  <rect class="b" x="10" y="40" width="150" height="200" rx="12"/>
+  <text class="l" x="24" y="64">1 · SOURCES</text>
+  <text class="ts" x="24" y="92">Lab reports</text><text class="ts" x="24" y="112">Wearables</text><text class="ts" x="24" y="132">Face and body scans</text><text class="ts" x="24" y="152">Food photos</text><text class="ts" x="24" y="172">Check ins</text><text class="ts" x="24" y="192">Partner APIs</text>
+
+  <rect class="ba" x="185" y="40" width="175" height="200" rx="12"/>
+  <text class="l" x="199" y="64">2 · TROOCORE DATA ENGINE</text>
+  <text class="tm" x="199" y="92">Collects every data point</text><text class="tm" x="199" y="112">Checks and cleans it</text><text class="tm" x="199" y="132">Standardises names, units</text><text class="tm" x="199" y="152">Keeps the full history</text><text class="tm" x="199" y="172">One profile per user</text>
+
+  <rect class="ba" x="385" y="40" width="175" height="200" rx="12"/>
+  <text class="l" x="399" y="64">3 · INTELLIGENCE</text>
+  <text class="tm" x="399" y="92">Advanced neural networks</text><text class="tm" x="399" y="112">Learn personal patterns</text><text class="tm" x="399" y="132">Score and choose actions</text><text class="tm" x="399" y="152">Within expert guardrails</text><text class="tm" x="399" y="172">Improve with feedback</text>
+
+  <rect class="b" x="585" y="40" width="140" height="200" rx="12"/>
+  <text class="l" x="599" y="64">4 · PLATFORM</text>
+  <text class="ts" x="599" y="92">One secure API</text><text class="ts" x="599" y="112">Profiles and plans</text><text class="ts" x="599" y="132">Store and content</text><text class="ts" x="599" y="152">Consent and access</text>
+
+  <rect class="b" x="750" y="40" width="140" height="200" rx="12"/>
+  <text class="l" x="764" y="64">5 · MOBILE APP</text>
+  <text class="ts" x="764" y="92">iOS and Android</text><text class="ts" x="764" y="112">Locked designs</text><text class="ts" x="764" y="132">Syncs phone</text><text class="ts" x="764" y="147">health data</text>
+
+  <path class="ar" d="M161 140 H183" marker-end="url(#w1)"/>
+  <path class="ar" d="M361 140 H383" marker-end="url(#w1)"/>
+  <path class="ar" d="M561 140 H583" marker-end="url(#w1)"/>
+  <path class="ar" d="M726 140 H748" marker-end="url(#w1)"/>
+
+  <rect class="b" x="185" y="272" width="175" height="62" rx="10"/>
+  <text class="tt" x="199" y="294">Admin console</text>
+  <text class="ts" x="199" y="311">Customise data points,</text><text class="ts" x="199" y="325">ranges and rules</text>
+  <path class="ar" d="M272 271 V242" marker-end="url(#w1)"/>
+
+  <rect class="bd" x="585" y="272" width="305" height="62" rx="10"/>
+  <text class="tt" x="599" y="294">Conversation layer (LLM)</text>
+  <text class="ts" x="599" y="311">Turns model outputs into plain language for the user.</text><text class="ts" x="599" y="325">It talks; it never makes the decision.</text>
+  <path class="ad" d="M655 241 V271"/><path class="ad" d="M820 241 V271"/>
+
+  <rect class="bn" x="10" y="360" width="880" height="36" rx="10"/>
+  <text class="lg" x="450" y="383" text-anchor="middle">SECURITY · CONSENT · AUDIT TRAIL · ACROSS EVERY LAYER</text>
+</svg></div>
+    <div class="foot a" style="--d:.4s"><b>Each part has one job.</b> Data in, processed by TrooCore, decided by our neural networks, delivered through one secure platform.</div>
+  </div>
+</section>
+
+<!-- 9 NEURAL NETWORKS -->
+<section class="sl" id="nnslide">
+  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">Inside TrooCore: advanced neural networks</h2></div></div>
+  <div class="sbd">
+    <div class="nnw">
+      <div class="a" style="--d:.2s"><svg class="dg" id="nnsvg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="n1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8B6BF7"/></marker>
+    <marker id="n2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4FD18B"/></marker>
+  </defs>
+  <text class="lg" x="10" y="30">DATA</text>
+  <text class="l" x="182" y="30">1 · ENCODERS</text>
+  <text class="l" x="388" y="30">2 · FUSION</text>
+  <text class="l" x="560" y="30">3 · OUTPUTS</text>
+  <text class="l" x="752" y="30">4 · GUARDRAILS</text>
+
+  <g class="grp" data-g="data"><rect class="b" x="10" y="44" width="150" height="46" rx="8"/><text class="tm" x="22" y="64">Lab biomarkers</text><text class="ts" x="22" y="80">Values, ranges</text>
+  <rect class="b" x="10" y="100" width="150" height="46" rx="8"/><text class="tm" x="22" y="120">Wearables</text><text class="ts" x="22" y="136">Readings over time</text>
+  <rect class="b" x="10" y="156" width="150" height="46" rx="8"/><text class="tm" x="22" y="176">Food and scans</text><text class="ts" x="22" y="192">Images</text>
+  <rect class="b" x="10" y="212" width="150" height="46" rx="8"/><text class="tm" x="22" y="232">Check ins</text><text class="ts" x="22" y="248">Answers, scales</text>
+  <rect class="b" x="10" y="268" width="150" height="46" rx="8"/><text class="tm" x="22" y="288">Context</text><text class="ts" x="22" y="304">Goals, past history</text>
+
+  </g>
+<g class="grp" data-g="enc"><rect class="ba" x="182" y="44" width="180" height="46" rx="8"/><text class="tm" x="194" y="64">Biomarker encoder</text><text class="ts" x="194" y="80">Structured health values</text>
+  <rect class="ba" x="182" y="100" width="180" height="46" rx="8"/><text class="tm" x="194" y="120">Time series encoder</text><text class="ts" x="194" y="136">Patterns across days, weeks</text>
+  <rect class="ba" x="182" y="156" width="180" height="46" rx="8"/><text class="tm" x="194" y="176">Vision encoder</text><text class="ts" x="194" y="192">Meals, portions, vitals</text>
+  <rect class="ba" x="182" y="212" width="180" height="46" rx="8"/><text class="tm" x="194" y="232">Check in encoder</text><text class="ts" x="194" y="248">Mood, stress, habits</text>
+  <rect class="ba" x="182" y="268" width="180" height="46" rx="8"/><text class="tm" x="194" y="288">Context encoder</text><text class="ts" x="194" y="304">Goals and past responses</text>
+
+  <path class="ar" d="M161 67 H180 M161 123 H180 M161 179 H180 M161 235 H180 M161 291 H180"/>
+  <path class="ar" d="M363 67 L386 150" marker-end="url(#n1)"/>
+  <path class="ar" d="M363 123 L386 165" marker-end="url(#n1)"/>
+  <path class="ar" d="M363 179 H386" marker-end="url(#n1)"/>
+  <path class="ar" d="M363 235 L386 193" marker-end="url(#n1)"/>
+  <path class="ar" d="M363 291 L386 208" marker-end="url(#n1)"/>
+
+  </g>
+<g class="grp" data-g="fus"><rect class="ba" x="388" y="44" width="150" height="270" rx="14" style="stroke-width:1.5"/>
+  <text class="tt" x="463" y="140" text-anchor="middle">Multimodal fusion</text>
+  <text class="ts" x="463" y="162" text-anchor="middle">One learned</text>
+  <text class="ts" x="463" y="177" text-anchor="middle">representation</text>
+  <text class="ts" x="463" y="192" text-anchor="middle">of the person</text>
+  <g fill="#B49CFB" opacity=".8">
+    <circle cx="433" cy="226" r="3"/><circle cx="448" cy="226" r="3"/><circle cx="463" cy="226" r="3"/><circle cx="478" cy="226" r="3"/><circle cx="493" cy="226" r="3"/>
+    <circle cx="440" cy="240" r="3"/><circle cx="455" cy="240" r="3"/><circle cx="470" cy="240" r="3"/><circle cx="485" cy="240" r="3"/>
+  </g>
+
+  <path class="ar" d="M539 150 L558 76" marker-end="url(#n1)"/>
+  <path class="ar" d="M539 165 L558 137" marker-end="url(#n1)"/>
+  <path class="ar" d="M539 193 L558 211" marker-end="url(#n1)"/>
+  <path class="ar" d="M539 208 L558 276" marker-end="url(#n1)"/>
+
+  </g>
+<g class="grp" data-g="out"><rect class="b" x="560" y="50" width="168" height="52" rx="8"/><text class="tm" x="572" y="71">Pillar scores</text><text class="ts" x="572" y="88">Five pillars, with confidence</text>
+  <rect class="b" x="560" y="112" width="168" height="52" rx="8"/><text class="tm" x="572" y="133">Change detection</text><text class="ts" x="572" y="150">Shifts from the person's normal</text>
+  <rect class="b" x="560" y="186" width="168" height="52" rx="8"/><text class="tm" x="572" y="207">Action scoring</text><text class="ts" x="572" y="224">What will help most today</text>
+  <rect class="b" x="560" y="250" width="168" height="52" rx="8"/><text class="tm" x="572" y="271">Stack matching</text><text class="ts" x="572" y="288">Supplements that fit</text>
+
+  <path class="ar" d="M729 76 L750 140 M729 138 L750 150 M729 212 L750 168 M729 276 L750 180"/>
+  </g>
+<g class="grp" data-g="grd"><rect class="bg" x="752" y="44" width="138" height="200" rx="12"/>
+  <text class="tt" x="764" y="70">Expert guardrails</text>
+  <text class="ts" x="764" y="94">Safe limits set with</text><text class="ts" x="764" y="109">your experts</text>
+  <text class="ts" x="764" y="133">Medications and</text><text class="ts" x="764" y="148">allergies respected</text>
+  <text class="ts" x="764" y="172">Wellness tone,</text><text class="ts" x="764" y="187">never a diagnosis</text>
+  <text class="ts" x="764" y="211">Every output traceable</text>
+  <path class="ag" d="M821 245 V264" marker-end="url(#n2)"/>
+  <rect class="b" x="752" y="266" width="138" height="48" rx="10"/>
+  <text class="tm" x="764" y="286">To the app</text><text class="ts" x="764" y="302">via conversation layer</text>
+
+  </g>
+<g class="grp" data-g="loop"><path class="ag" d="M821 315 V350 H85 V316" marker-end="url(#n2)" style="stroke-dasharray:4 3"/>
+  <text class="lg" x="450" y="374" text-anchor="middle">LEARNING LOOP · WHAT USERS FOLLOW, HOW THEIR MARKERS MOVE, THEIR CORRECTIONS</text>
+</g>
+</svg></div>
+      <div class="a" style="--d:.3s">
+        <div class="stps">
+          <button class="stp cur" data-s="all"><span>00</span>The whole picture</button>
+          <button class="stp" data-s="enc"><span>01</span>Encoders</button>
+          <button class="stp" data-s="fus"><span>02</span>Multimodal fusion</button>
+          <button class="stp" data-s="out"><span>03</span>Outputs</button>
+          <button class="stp" data-s="grd"><span>04</span>Expert guardrails</button>
+          <button class="stp" data-s="loop"><span>05</span>Learning loop</button>
+        </div>
+        <div class="exp" id="exp"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 DECIDE VS TALK -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">Our neural networks decide. The LLM only talks.</h2></div></div>
+  <div class="sbd mid">
+    <div class="flow">
+      <div class="fn2 a" style="--d:.18s"><i>Input</i><b>TrooCore data</b><span>Every data point, cleaned and with full history</span></div>
+      <div class="fa a" style="--d:.24s"></div>
+      <div class="fn2 main a" style="--d:.3s"><i>Decides</i><b>Neural networks</b><span>Our own models choose what goes into each plan. Tested before release, versioned and monitored.</span></div>
+      <div class="fa a" style="--d:.36s"></div>
+      <div class="fn2 a" style="--d:.42s"><i>Output</i><b>Daily plan</b><span>Approved by expert guardrails</span></div>
+      <div class="fa dim a" style="--d:.48s"></div>
+      <div class="fn2 talk a" style="--d:.54s"><i>Talks</i><b>Language model</b><span>Explains the plan and answers questions. It never decides, because it can sound right and still be wrong.</span></div>
+      <div class="fa dim a" style="--d:.6s"></div>
+      <div class="fn2 a" style="--d:.66s"><i>Sees</i><b>The user</b><span>A plan with a clear "why this"</span></div>
+    </div>
+    <div class="subk a" style="--d:.72s;margin-top:64px">How the models learn</div>
+    <div class="lrn">
+      <div class="a" style="--d:.78s"><span>01</span><b>Start from expert knowledge</b><p>Trained first on curated reference data and guidance from your experts, so outputs are sound from the first release.</p></div>
+      <div class="a" style="--d:.84s"><span>02</span><b>Learn from every user</b><p>Retrained on anonymised data as profiles build up history, getting more personal over time.</p></div>
+      <div class="a" style="--d:.9s"><span>03</span><b>Tested before they ship</b><p>Every version evaluated on held out cases, monitored in use, and rolled back if it underperforms.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 BUILD STEPS -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">How we would build it, and how it grows</h2></div></div>
+  <div class="sbd mid">
+    <div class="tline">
+      <div class="a" style="--d:.15s"><span>01</span><b>Study and map</b><p>Board, PRD, screens and current code. Test every API.</p></div>
+      <div class="a" style="--d:.21s"><span>02</span><b>Design the data model</b><p>Source, time and confidence for every data point.</p></div>
+      <div class="a" style="--d:.27s"><span>03</span><b>Build the pipelines</b><p>Every source into TrooCore, checked early.</p></div>
+      <div class="a" style="--d:.33s"><span>04</span><b>Build the app</b><p>Module by module on the locked designs.</p></div>
+      <div class="a" style="--d:.39s"><span>05</span><b>Train the models</b><p>Expert defaults first, then TrooCore data.</p></div>
+      <div class="a" style="--d:.45s"><span>06</span><b>Test, then launch</b><p>Data checks, expert review, security, UAT.</p></div>
+      <div class="a" style="--d:.51s"><span>07</span><b>Run and improve</b><p>Monitor, retrain, add the next features.</p></div>
+    </div>
+    <div class="subk a" style="--d:.6s;margin-top:70px">How it grows · one platform, extended</div>
+    <div class="band a" style="--d:.66s">
+      <div class="seg s1"><b>Phase 1 · Foundation</b></div>
+      <div class="seg s2"><b>Phase 2 · Intelligence</b></div>
+      <div class="seg s3"><b>Phase 3 · Ecosystem</b></div>
+    </div>
+    <div class="bandt a" style="--d:.72s">
+      <p>The app, TrooCore, labs, wearables, dashboard, daily protocol, store and admin console.</p>
+      <p>Deeper personal models, scans and food, adaptive workouts, the conversation layer.</p>
+      <p>Rewards and Tribe, AI Doctor, gut and epigenetic data, forward looking insights.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 RECS -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">08 · Our recommendations</div><h2 class="a" style="--d:.08s">What we recommend, to build what you want to build</h2></div></div>
+  <div class="sbd mid">
+    <div class="rl">
+      <div class="a" style="--d:.15s"><span>01</span><div><b>Build TrooCore before the screens</b><p>Decide how every data point is stored first, so later phases plug in without rework.</p></div></div>
+      <div class="a" style="--d:.2s"><span>05</span><div><b>Test every API first</b><p>Sample data and accuracy checks before building on any vendor.</p></div></div>
+      <div class="a" style="--d:.25s"><span>02</span><div><b>Make data points customisable</b><p>Markers, ranges, sources and rules managed from the admin console.</p></div></div>
+      <div class="a" style="--d:.3s"><span>06</span><div><b>Keep the tone in check</b><p>Out of range markers read as worth attention, never as alarms.</p></div></div>
+      <div class="a" style="--d:.35s"><span>03</span><div><b>Let neural networks decide</b><p>The LLM only explains and converses.</p></div></div>
+      <div class="a" style="--d:.4s"><span>07</span><div><b>Health Connect and one aggregator</b><p>Google Fit APIs are deprecated. One aggregator covers the cloud wearables.</p></div></div>
+      <div class="a" style="--d:.45s"><span>04</span><div><b>Keep every vendor replaceable</b><p>Each API behind its own connector. Change a vendor, nothing else moves.</p></div></div>
+      <div class="a" style="--d:.5s"><span>08</span><div><b>Shopify store, privacy built in</b><p>Your existing store, India hosting, consent per data type, DPDP Act aligned.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 TEAM + NEXT -->
+<section class="sl">
+  <div class="fin">
+    <div>
+      <div class="kk a">Who builds it</div>
+      <h2 class="a" style="--d:.08s">A long term technology partner, not an app vendor</h2>
+      <div class="who">
+        <div class="a" style="--d:.2s"><i>Health ML experience</i><p>Rahul, our tech lead, led backend and machine learning at <b>Twin Health</b>, working on metabolic biomarkers alongside medication data.</p></div>
+        <div class="a" style="--d:.28s"><i>Health data literacy</i><p>Our team includes formal training in <b>health informatics</b>. Markers, ranges and standards shape how we design.</p></div>
+        <div class="a" style="--d:.36s"><i>We already know Wellbeing</i><p>We already work with your team on <b>wellbeingnutrition.com</b>, and build for Titan, Tanishq, Durex and Bombay Shaving Company.</p></div>
+      </div>
+    </div>
+    <div class="nx">
+      <div class="kk a" style="--d:.3s">Next steps</div>
+      <div class="vst">
+        <div class="a" style="--d:.38s"><span>1</span><div><b>Miro board and PRD</b><p>Access shared with tech@pushstart.in</p></div></div>
+        <div class="a" style="--d:.44s"><span>2</span><div><b>Screens and designs</b><p>Screen map and design files</p></div></div>
+        <div class="a" style="--d:.5s"><span>3</span><div><b>API list</b><p>Vendors, documentation and sample outputs</p></div></div>
+        <div class="a" style="--d:.56s"><span>4</span><div><b>Current build</b><p>A walkthrough with your tech partner</p></div></div>
+      </div>
+      <p class="then a" style="--d:.64s">Then we come back with the detailed scope, costing and commercial terms.</p>
+      <div class="ctc a" style="--d:.7s"><div class="logo" style="width:34px;height:34px;font-size:15px">T</div><div><b>Troopod</b><span>nj@troopod.io</span></div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+
+<div class="bar">
+  <div class="dots" id="dots"></div>
+  <div class="ctl"><span id="ct">1 / 13</span><button id="fs">Full screen</button></div>
+</div>
+
+<script>
+(function(){
+var sl=[].slice.call(document.querySelectorAll('.sl')),N=sl.length,cur=0,dw=document.getElementById('dots');
+sl.forEach(function(_,k){var d=document.createElement('button');d.className='dot';d.setAttribute('aria-label','Slide '+(k+1));d.onclick=function(){go(k)};dw.appendChild(d)});
+var dots=[].slice.call(dw.children);
+function fit(){var s=Math.min(innerWidth/1600,(innerHeight)/900);document.getElementById('stage').style.setProperty('--s',s);}
+addEventListener('resize',fit);fit();
+function go(i){i=Math.max(0,Math.min(N-1,i));sl[cur].classList.remove('on');cur=i;var s=sl[cur];
+ s.querySelectorAll('.a,.ar,.ag').forEach(function(el){el.style.animation='none';el.getBoundingClientRect();el.style.animation='';});
+ s.classList.add('on');dots.forEach(function(d,k){d.classList.toggle('on',k===cur)});
+ document.getElementById('ct').textContent=(cur+1)+' / '+N;document.getElementById('prog').style.width=((cur+1)/N*100)+'%';
+ if(s.id==='nnslide')nn.set('all');
+ history.replaceState(null,'','#'+(cur+1));}
+addEventListener('keydown',function(e){if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1)}if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1)}if(e.key==='Home')go(0);if(e.key==='End')go(N-1);if(e.key==='f')fs();});
+document.getElementById('stage').addEventListener('click',function(e){if(e.target.closest('button,a,.hc,.phones,svg,.exp'))return;go(e.clientX>innerWidth/2?cur+1:cur-1);});
+document.querySelectorAll('.hc').forEach(function(h){h.onclick=function(){go(+h.dataset.go-1)}});
+function fs(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}else{document.exitFullscreen();}}
+document.getElementById('fs').onclick=fs;
+var T={
+ all:['The whole picture','Every kind of health data is understood on its own terms, combined into one learned picture of the person, and turned into every output the app needs. Click each step to walk through it.'],
+ enc:['Encoders','Each data type has its own encoder: structured lab values, readings over time, images, check in answers and context. A new source, such as gut microbiome results, means adding one encoder, not a new system.'],
+ fus:['Multimodal fusion','All encoders feed one network that learns a single representation of the person. This is where links across signals are found, such as sleep and glucose, or stress and recovery.'],
+ out:['Outputs','From that one representation come pillar scores, change detection, action scoring and supplement matching. Because they share one source, every screen tells the same story.'],
+ grd:['Expert guardrails','Every output is checked against limits set with your experts: medications, allergies, safe ranges and wellness tone. Personalisation never goes outside them.'],
+ loop:['Learning loop','What users follow, how their markers move and the corrections they make flow back into training. Accuracy improves for each user and across all users.']};
+var nn={set:function(k){var g=document.querySelectorAll('#nnsvg g.grp');g.forEach(function(x){var on=k==='all'||x.dataset.g===k||(k==='enc'&&x.dataset.g==='data');x.style.opacity=on?1:.15});
+ document.querySelectorAll('.stp').forEach(function(b){b.classList.toggle('cur',b.dataset.s===k)});
+ document.getElementById('exp').innerHTML='<b>'+T[k][0]+'</b>'+T[k][1];}};
+document.querySelectorAll('.stp').forEach(function(b){b.onclick=function(){nn.set(b.dataset.s)}});
+var h=parseInt((location.hash||'#1').slice(1),10);go(isNaN(h)?0:h-1);
+})();
+</script>
+</body>
+</html>

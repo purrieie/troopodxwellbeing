@@ -189,7 +189,7 @@ svg.dg{display:block;width:100%;height:auto}
 .fn2 b{display:block;font-size:26px;font-weight:600;margin:10px 0 8px;letter-spacing:-.01em}
 .fn2 span{display:block;font-size:16.5px;line-height:1.5;color:var(--text2)}
 .fn2.main{border-top:4px solid var(--accent)}
-.fn2.main i{color:var(--accent-lt)} .fn2.main b{font-size:34px;background:linear-gradient(120deg,var(--accent-lt),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.fn2.main i{color:var(--accent-lt)} .fn2.main b{font-size:26px;background:linear-gradient(120deg,var(--accent-lt),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .fn2.talk{border-top:2px dashed rgba(255,255,255,.28)} .fn2.talk b{color:var(--text2)}
 .fa{position:relative}
 .fa::before{content:"";position:absolute;left:10px;right:14px;top:-1px;height:2px;background:var(--accent)}
@@ -255,6 +255,20 @@ svg.dg{display:block;width:100%;height:auto}
 .hw-r .mn{font-size:21px;line-height:1.45;color:var(--text)}
 .hw-r .mn b{font-weight:600;color:var(--accent-lt)}
 
+
+/* team slide */
+.tm3{display:grid;grid-template-columns:1fr 400px 1fr;gap:40px;align-items:center}
+.person i{font-style:normal;font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-lt)}
+.person b{display:block;font-size:34px;font-weight:600;letter-spacing:-.01em;margin:10px 0 2px}
+.person em{display:block;font-style:normal;font-size:17px;color:var(--text3);margin-bottom:16px}
+.person p{font-size:17.5px;line-height:1.55;color:var(--text2);padding:12px 0;border-top:1px solid var(--line)}
+.person p strong{color:var(--text);font-weight:600}
+.venn svg{width:100%;height:auto;display:block;filter:drop-shadow(0 0 28px rgba(139,107,247,.35))}
+.why3{display:grid;grid-template-columns:repeat(3,1fr);gap:50px;margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+.why3 span{font:600 15px var(--mono);color:var(--accent-lt)}
+.why3 b{display:block;font-size:21px;font-weight:600;margin:6px 0 6px}
+.why3 p{font-size:16.5px;line-height:1.5;color:var(--text2)}
+
 /* bottom bar */
 .bar{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:linear-gradient(0deg,rgba(11,11,13,.96),rgba(11,11,13,.6));z-index:10}
 .dots{display:flex;gap:7px;align-items:center}
@@ -278,11 +292,11 @@ svg.dg{display:block;width:100%;height:auto}
   <h1 class="a" style="--d:.15s">Engineering the foundation for <em>Wellbeing 2.0</em></h1>
   <p class="lead a" style="--d:.25s">How we understand Wellbeing 2.0, how we would build it, and what we recommend so it launches as a finished product and keeps growing from there.</p>
   <div class="agenda">
-    <div class="hc a" style="--d:.35s" data-go="2"><i>01</i><b>Goal and vision</b></div>
-    <div class="hc a" style="--d:.41s" data-go="4"><i>02</i><b>What we're building</b></div>
-    <div class="hc a" style="--d:.47s" data-go="7"><i>03</i><b>Product concepts</b></div>
-    <div class="hc a" style="--d:.53s" data-go="8"><i>04</i><b>Way to build</b></div>
-    <div class="hc a" style="--d:.59s" data-go="12"><i>05</i><b>Recommendations</b></div>
+    <div class="hc a" style="--d:.35s" data-go="2"><i>01</i><b>Goal and team</b></div>
+    <div class="hc a" style="--d:.41s" data-go="4"><i>02</i><b>Vision</b></div>
+    <div class="hc a" style="--d:.47s" data-go="8"><i>03</i><b>Product concepts</b></div>
+    <div class="hc a" style="--d:.53s" data-go="9"><i>04</i><b>Way to build</b></div>
+    <div class="hc a" style="--d:.59s" data-go="13"><i>05</i><b>Recommendations</b></div>
   </div>
 </section>
 
@@ -291,7 +305,7 @@ svg.dg{display:block;width:100%;height:auto}
   <div class="sh"><div><div class="kk a">01 · Goal</div><h2 class="a" style="--d:.08s">A complete product from the first release, on a foundation that keeps growing</h2></div></div>
   <div class="sbd mid">
     <div class="c3">
-      <div class="cd a" style="--d:.2s"><i>Launch</i><b>A finished product, not a beta</b><p>Every journey, data source and recommendation working together from day one. The brand's equity stays protected.</p></div>
+      <div class="cd a" style="--d:.2s"><i>Launch</i><b>A finished product, not a beta</b><p>Every journey, data source and recommendation working from day one.</p></div>
       <div class="cd hi a" style="--d:.28s"><i>Core</i><b>TrooCore at the centre</b><p>All health data processed by our neural networks into one living profile of each person.</p></div>
       <div class="cd a" style="--d:.36s"><i>Future</i><b>Built to grow</b><p>New data types, markers and models plug in without a rebuild, from genetics to imaging.</p></div>
     </div>
@@ -299,9 +313,57 @@ svg.dg{display:block;width:100%;height:auto}
   </div>
 </section>
 
+<!-- 3 TEAM -->
+<section class="sl">
+  <div class="sh"><div><div class="kk a">02 · Who builds it</div><h2 class="a" style="--d:.08s">Where technology meets product</h2></div></div>
+  <div class="sbd mid">
+    <div class="tm3">
+      <div class="person a" style="--d:.2s">
+        <i>Technology</i>
+        <b>Rahul Bhola</b>
+        <em>Technology lead</em>
+        <p>Led backend and machine learning at <strong>Twin Health</strong>, the US health tech company, building on metabolic biomarkers alongside medication data.</p>
+        <p>Hands on experience with neural network models on health data, the core of TrooCore.</p>
+      </div>
+      <div class="venn a" style="--d:.3s">
+        <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="vclip"><circle cx="130" cy="130" r="105"/></clipPath>
+            <radialGradient id="vgrad" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#9F84FA"/><stop offset="100%" stop-color="#6C4FE0"/></radialGradient>
+            <filter id="vglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+          </defs>
+          <circle cx="130" cy="130" r="105" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.14)" stroke-width="1.2"/>
+          <circle cx="230" cy="130" r="105" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.14)" stroke-width="1.2"/>
+          <g clip-path="url(#vclip)">
+            <circle cx="230" cy="130" r="105" fill="url(#vgrad)" opacity=".55" filter="url(#vglow)"/>
+            <circle cx="230" cy="130" r="105" fill="url(#vgrad)" stroke="#C9B8FF" stroke-width="1.5"/>
+          </g>
+          <text x="78" y="134" text-anchor="middle" font-family="DM Mono" font-size="12" letter-spacing="1.5" fill="#6E6E7C">TECH</text>
+          <text x="282" y="134" text-anchor="middle" font-family="DM Mono" font-size="12" letter-spacing="1.5" fill="#6E6E7C">PRODUCT</text>
+          <text x="180" y="124" text-anchor="middle" font-family="DM Sans" font-size="16" font-weight="700" fill="#FFFFFF">Wellbeing</text>
+          <text x="180" y="145" text-anchor="middle" font-family="DM Sans" font-size="16" font-weight="700" fill="#FFFFFF">2.0</text>
+        </svg>
+      </div>
+      <div class="person a" style="--d:.4s">
+        <i style="color:var(--blue)">Product</i>
+        <b>Jaanya Dhingra</b>
+        <em>AI Product Manager</em>
+        <p>Studied Computer Science with a focus on <strong>health informatics</strong>, so markers, ranges and health data standards shape every product decision.</p>
+        <p>A published <strong>IEEE</strong> author, bringing research rigour to how the product is designed.</p>
+      </div>
+    </div>
+    <div class="why3">
+      <div class="a" style="--d:.5s"><span>01</span><b>Built by people who know health data</b><p>The data model and the screens are designed by people who understand biomarkers.</p></div>
+      <div class="a" style="--d:.56s"><span>02</span><b>One team, data to screen</b><p>Technology and product sit together, so nothing gets lost between them.</p></div>
+      <div class="a" style="--d:.62s"><span>03</span><b>A long term health tech partner</b><p>We stay through every phase, from launch to the most advanced models.</p></div>
+    </div>
+    <div class="foot a" style="--d:.7s;margin-top:34px">We already work with your team on <b>wellbeingnutrition.com</b>, and build for Titan, Tanishq, Durex and Bombay Shaving Company.</div>
+  </div>
+</section>
+
 <!-- 3 VISION -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">02 · Vision</div><h2 class="a" style="--d:.08s">TrooCore: every input in, one living profile, everything out</h2></div></div>
+  <div class="sh"><div><div class="kk a">03 · Vision</div><h2 class="a" style="--d:.08s">TrooCore: every input in, one living profile, everything out</h2></div></div>
   <div class="sbd">
     <div class="a" style="--d:.2s;max-width:1250px;margin:0 auto;width:100%"><svg class="dg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
   <defs><marker id="v1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8B6BF7"/></marker></defs>
@@ -349,11 +411,11 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 4 WHAT WE'RE BUILDING -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">03 · What we're building</div><h2 class="a" style="--d:.08s">Not an app that calls APIs. A health data platform with an app on top.</h2></div></div>
+  <div class="sh"><div><div class="kk a">04 · What we're building</div><h2 class="a" style="--d:.08s">Not an app that calls APIs. A health data platform with an app on top.</h2></div></div>
   <div class="sbd mid">
     <div class="c4">
       <div class="cd hi a" style="--d:.2s"><i>The app</i><b>iOS and Android</b><p>All locked screens and journeys, including the supplement store.</p></div>
-      <div class="cd hi a" style="--d:.27s"><i>TrooCore data engine</i><b>Where data is processed</b><p>Every source checked, standardised and kept as full history.</p></div>
+      <div class="cd hi a" style="--d:.27s"><i>TrooCore engine</i><b>Data processing</b><p>Every source checked, standardised and kept as history.</p></div>
       <div class="cd hi a" style="--d:.34s"><i>Intelligence</i><b>Neural networks</b><p>Our own multimodal models that decide what goes into each plan.</p></div>
       <div class="cd hi a" style="--d:.41s"><i>Admin console</i><b>Control for your team</b><p>Customise data points, ranges and rules without code changes.</p></div>
     </div>
@@ -368,12 +430,12 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 5 CORE FEATURES -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">04 · Core features</div><h2 class="a" style="--d:.08s">Every feature connects to TrooCore</h2></div></div>
+  <div class="sh"><div><div class="kk a">05 · Core features</div><h2 class="a" style="--d:.08s">Every feature connects to TrooCore</h2></div></div>
   <div class="sbd mid">
     <div class="c3">
       <div class="fc a" style="--d:.2s"><i style="color:var(--blue)">Feeds TrooCore</i>
         <div class="fr"><b>Biomarkers</b>Reports, partner labs, cards by system</div>
-        <div class="fr"><b>Wearables</b>Apple Health, Health Connect, Oura, Whoop, Ultrahuman, Fitbit</div>
+        <div class="fr"><b>Wearables</b>Apple Health, Health Connect, Oura, Whoop</div>
         <div class="fr"><b>Scans and food</b>Face, body, vitals; meal photos and macros</div>
         <div class="fr"><b>Check ins</b>Mental, emotional, social and spiritual pillars</div>
       </div>
@@ -396,12 +458,12 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 6 UNDERSTANDING -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">05 · Our understanding</div><h2 class="a" style="--d:.08s">What we heard, and what it means for the build</h2></div></div>
+  <div class="sh"><div><div class="kk a">06 · Our understanding</div><h2 class="a" style="--d:.08s">What we heard, and what it means for the build</h2></div></div>
   <div class="sbd mid">
     <div class="hw">
       <div class="hw-h a" style="--d:.12s"><span></span><span>What we heard</span><span></span><span>What it means for the build</span></div>
-      <div class="hw-r a" style="--d:0.18s"><span>01</span><p class="hd">Design, product and user journeys are locked, across 400 to 500 screens.</p><i>→</i><p class="mn">We build them faithfully and stitch every journey into <b>one product</b>.</p></div>
-      <div class="hw-r a" style="--d:0.25s"><span>02</span><p class="hd">Five to six APIs have to work together without failing.</p><i>→</i><p class="mn">TrooCore brings every source into <b>one shape</b> before anything is scored.</p></div>
+      <div class="hw-r a" style="--d:0.18s"><span>01</span><p class="hd">Designs and user journeys are locked, 400 to 500 screens.</p><i>→</i><p class="mn">We build them faithfully and stitch every journey into <b>one product</b>.</p></div>
+      <div class="hw-r a" style="--d:0.25s"><span>02</span><p class="hd">Five to six APIs have to work together without failing.</p><i>→</i><p class="mn">TrooCore brings every source into <b>one shape</b> first.</p></div>
       <div class="hw-r a" style="--d:0.32s"><span>03</span><p class="hd">The team building it has to understand health, not just code.</p><i>→</i><p class="mn">Health data literacy sits <b>inside our tech team</b>, not outside it.</p></div>
       <div class="hw-r a" style="--d:0.39s"><span>04</span><p class="hd">No beta. The brand's equity cannot be compromised.</p><i>→</i><p class="mn">Data checks, expert review and UAT are <b>built into the plan</b>.</p></div>
       <div class="hw-r a" style="--d:0.46s"><span>05</span><p class="hd">Genetic, gut, imaging and neuro data come in later phases.</p><i>→</i><p class="mn">The foundation lets new data <b>plug in without a rebuild</b>.</p></div>
@@ -414,7 +476,7 @@ svg.dg{display:block;width:100%;height:auto}
 <section class="sl">
   <div class="pw">
     <div class="left">
-      <div class="kk a">06 · Product concepts</div>
+      <div class="kk a">07 · Product concepts</div>
       <h2 class="a" style="--d:.08s">How TrooCore shows up for the user</h2>
       <p class="ptxt a" style="--d:.16s">One score with its confidence. A biomarker in plain language. A daily plan that explains itself.</p>
       <div class="pill a" style="--d:.24s">Illustrative concepts · the build follows your locked designs</div>
@@ -451,7 +513,7 @@ svg.dg{display:block;width:100%;height:auto}
         </div>
         <div class="tabs"><span class="on">Home</span><span>Insights</span><span>Plan</span><span>Store</span><span>You</span></div>
       </div></div>
-      <div class="ph-cap"><div class="k">Unified dashboard</div><p>One score across the five pillars, with its confidence shown openly. Missing sources lower confidence instead of hiding the score.</p></div>
+      <div class="ph-cap"><div class="k">Unified dashboard</div><p>One score across the five pillars, with its confidence shown openly.</p></div>
     </div>
 
     <!-- phone 2 biomarker -->
@@ -470,17 +532,17 @@ svg.dg{display:block;width:100%;height:auto}
           </div>
           <div class="w-card">
             <div class="w-h">What it means</div>
-            <div style="font-size:10.5px;color:#4A5F57;line-height:1.5">Vitamin D supports bone health, muscle function and immunity. Yours is below the sufficient range, which is very common in India. Small, steady changes usually bring it up.</div>
+            <div style="font-size:10.5px;color:#4A5F57;line-height:1.5">Supports bone health, muscle function and immunity. Yours is below range, which is common in India.</div>
           </div>
           <div class="w-card">
             <div class="w-h">What you can do</div>
-            <div style="font-size:10.5px;line-height:1.9">☀ Some sun on your arms and face, most days<br>◐ Vitamin D3 with your largest meal<br>↻ Retest in 12 weeks</div>
+            <div style="font-size:10.5px;line-height:1.75">☀ Some sun on arms and face, most days<br>◐ Vitamin D3 with your largest meal<br>↻ Retest in 12 weeks</div>
           </div>
           <div style="font-size:9px;color:#8A9A93;margin-top:8px">Source: partner lab report, 23 Oct</div>
         </div>
         <div class="tabs"><span>Home</span><span class="on">Insights</span><span>Plan</span><span>Store</span><span>You</span></div>
       </div></div>
-      <div class="ph-cap"><div class="k">Biomarker insight</div><p>Standardised value, the reference range, trend across reports, and the source. Calm language: below range, not abnormal.</p></div>
+      <div class="ph-cap"><div class="k">Biomarker insight</div><p>Value, reference range, trend and source, in calm language.</p></div>
     </div>
 
     <!-- phone 3 protocol -->
@@ -497,12 +559,12 @@ svg.dg{display:block;width:100%;height:auto}
             <div class="act"><span class="cb"></span><div><div class="at">5 min breathing before bed</div><div class="as">Mental</div></div></div>
           </div>
           <div class="bub u">Can I still run tomorrow?</div>
-          <div class="bub a">If you sleep 7 hours or more tonight, yes. I'll check your recovery in the morning and update the plan.</div>
+          <div class="bub a">Yes, if you sleep 7 hours tonight. I'll update the plan in the morning.</div>
           <div class="ask"><span>Ask about your plan</span><span>↑</span></div>
         </div>
         <div class="tabs"><span>Home</span><span>Insights</span><span class="on">Plan</span><span>Store</span><span>You</span></div>
       </div></div>
-      <div class="ph-cap"><div class="k">AI protocol assistant</div><p>Each action shows why it is there and the data behind it. The plan comes from our models; the assistant is only the conversation around it.</p></div>
+      <div class="ph-cap"><div class="k">AI protocol assistant</div><p>Every action shows why it is there. The assistant only explains.</p></div>
     </div>
   </div>
 
@@ -512,7 +574,7 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 8 WAY TO BUILD -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">A simple shape that can grow</h2></div></div>
+  <div class="sh"><div><div class="kk a">08 · Way to build</div><h2 class="a" style="--d:.08s">A simple shape that can grow</h2></div></div>
   <div class="sbd">
     <div class="a" style="--d:.2s;max-width:1300px;margin:0 auto;width:100%"><svg class="dg" viewBox="0 0 900 410" xmlns="http://www.w3.org/2000/svg">
   <defs><marker id="w1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8B6BF7"/></marker></defs>
@@ -521,7 +583,7 @@ svg.dg{display:block;width:100%;height:auto}
   <text class="ts" x="24" y="92">Lab reports</text><text class="ts" x="24" y="112">Wearables</text><text class="ts" x="24" y="132">Face and body scans</text><text class="ts" x="24" y="152">Food photos</text><text class="ts" x="24" y="172">Check ins</text><text class="ts" x="24" y="192">Partner APIs</text>
 
   <rect class="ba" x="185" y="40" width="175" height="200" rx="12"/>
-  <text class="l" x="199" y="64">2 · TROOCORE DATA ENGINE</text>
+  <text class="l" x="199" y="64">2 · TROOCORE ENGINE</text>
   <text class="tm" x="199" y="92">Collects every data point</text><text class="tm" x="199" y="112">Checks and cleans it</text><text class="tm" x="199" y="132">Standardises names, units</text><text class="tm" x="199" y="152">Keeps the full history</text><text class="tm" x="199" y="172">One profile per user</text>
 
   <rect class="ba" x="385" y="40" width="175" height="200" rx="12"/>
@@ -560,7 +622,7 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 9 NEURAL NETWORKS -->
 <section class="sl" id="nnslide">
-  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">Inside TrooCore: advanced neural networks</h2></div></div>
+  <div class="sh"><div><div class="kk a">08 · Way to build</div><h2 class="a" style="--d:.08s">Inside TrooCore: advanced neural networks</h2></div></div>
   <div class="sbd">
     <div class="nnw">
       <div class="a" style="--d:.2s"><svg class="dg" id="nnsvg" viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
@@ -612,7 +674,7 @@ svg.dg{display:block;width:100%;height:auto}
 
   </g>
 <g class="grp" data-g="out"><rect class="b" x="560" y="50" width="168" height="52" rx="8"/><text class="tm" x="572" y="71">Pillar scores</text><text class="ts" x="572" y="88">Five pillars, with confidence</text>
-  <rect class="b" x="560" y="112" width="168" height="52" rx="8"/><text class="tm" x="572" y="133">Change detection</text><text class="ts" x="572" y="150">Shifts from the person's normal</text>
+  <rect class="b" x="560" y="112" width="168" height="52" rx="8"/><text class="tm" x="572" y="133">Change detection</text><text class="ts" x="572" y="150">Shifts from their normal</text>
   <rect class="b" x="560" y="186" width="168" height="52" rx="8"/><text class="tm" x="572" y="207">Action scoring</text><text class="ts" x="572" y="224">What will help most today</text>
   <rect class="b" x="560" y="250" width="168" height="52" rx="8"/><text class="tm" x="572" y="271">Stack matching</text><text class="ts" x="572" y="288">Supplements that fit</text>
 
@@ -650,22 +712,22 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 10 DECIDE VS TALK -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">Our neural networks decide. The LLM only talks.</h2></div></div>
+  <div class="sh"><div><div class="kk a">08 · Way to build</div><h2 class="a" style="--d:.08s">Our neural networks decide. The LLM only talks.</h2></div></div>
   <div class="sbd mid">
     <div class="flow">
       <div class="fn2 a" style="--d:.18s"><i>Input</i><b>TrooCore data</b><span>Every data point, cleaned and with full history</span></div>
       <div class="fa a" style="--d:.24s"></div>
-      <div class="fn2 main a" style="--d:.3s"><i>Decides</i><b>Neural networks</b><span>Our own models choose what goes into each plan. Tested before release, versioned and monitored.</span></div>
+      <div class="fn2 main a" style="--d:.3s"><i>Decides</i><b>Neural networks</b><span>Our own models choose what goes into each plan.</span></div>
       <div class="fa a" style="--d:.36s"></div>
       <div class="fn2 a" style="--d:.42s"><i>Output</i><b>Daily plan</b><span>Approved by expert guardrails</span></div>
       <div class="fa dim a" style="--d:.48s"></div>
-      <div class="fn2 talk a" style="--d:.54s"><i>Talks</i><b>Language model</b><span>Explains the plan and answers questions. It never decides, because it can sound right and still be wrong.</span></div>
+      <div class="fn2 talk a" style="--d:.54s"><i>Talks</i><b>Language model</b><span>Explains and answers. Never decides, as it can be wrong.</span></div>
       <div class="fa dim a" style="--d:.6s"></div>
       <div class="fn2 a" style="--d:.66s"><i>Sees</i><b>The user</b><span>A plan with a clear "why this"</span></div>
     </div>
     <div class="subk a" style="--d:.72s;margin-top:64px">How the models learn</div>
     <div class="lrn">
-      <div class="a" style="--d:.78s"><span>01</span><b>Start from expert knowledge</b><p>Trained first on curated reference data and guidance from your experts, so outputs are sound from the first release.</p></div>
+      <div class="a" style="--d:.78s"><span>01</span><b>Start from expert knowledge</b><p>Trained first on curated data and your experts' guidance, so outputs are sound from day one.</p></div>
       <div class="a" style="--d:.84s"><span>02</span><b>Learn from every user</b><p>Retrained on anonymised data as profiles build up history, getting more personal over time.</p></div>
       <div class="a" style="--d:.9s"><span>03</span><b>Tested before they ship</b><p>Every version evaluated on held out cases, monitored in use, and rolled back if it underperforms.</p></div>
     </div>
@@ -674,16 +736,16 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 11 BUILD STEPS -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">07 · Way to build</div><h2 class="a" style="--d:.08s">How we would build it, and how it grows</h2></div></div>
+  <div class="sh"><div><div class="kk a">08 · Way to build</div><h2 class="a" style="--d:.08s">How we would build it, and how it grows</h2></div></div>
   <div class="sbd mid">
     <div class="tline">
-      <div class="a" style="--d:.15s"><span>01</span><b>Study and map</b><p>Board, PRD, screens and current code. Test every API.</p></div>
-      <div class="a" style="--d:.21s"><span>02</span><b>Design the data model</b><p>Source, time and confidence for every data point.</p></div>
-      <div class="a" style="--d:.27s"><span>03</span><b>Build the pipelines</b><p>Every source into TrooCore, checked early.</p></div>
+      <div class="a" style="--d:.15s"><span>01</span><b>Study and map</b><p>Study the board, PRD and code.</p></div>
+      <div class="a" style="--d:.21s"><span>02</span><b>Model the data</b><p>Source, time and confidence per point.</p></div>
+      <div class="a" style="--d:.27s"><span>03</span><b>Build pipelines</b><p>Every source into TrooCore.</p></div>
       <div class="a" style="--d:.33s"><span>04</span><b>Build the app</b><p>Module by module on the locked designs.</p></div>
-      <div class="a" style="--d:.39s"><span>05</span><b>Train the models</b><p>Expert defaults first, then TrooCore data.</p></div>
-      <div class="a" style="--d:.45s"><span>06</span><b>Test, then launch</b><p>Data checks, expert review, security, UAT.</p></div>
-      <div class="a" style="--d:.51s"><span>07</span><b>Run and improve</b><p>Monitor, retrain, add the next features.</p></div>
+      <div class="a" style="--d:.39s"><span>05</span><b>Train models</b><p>Expert defaults, then real data.</p></div>
+      <div class="a" style="--d:.45s"><span>06</span><b>Test and launch</b><p>Data checks, expert review, UAT.</p></div>
+      <div class="a" style="--d:.51s"><span>07</span><b>Run and improve</b><p>Monitor, retrain, keep adding.</p></div>
     </div>
     <div class="subk a" style="--d:.6s;margin-top:70px">How it grows · one platform, extended</div>
     <div class="band a" style="--d:.66s">
@@ -701,49 +763,42 @@ svg.dg{display:block;width:100%;height:auto}
 
 <!-- 12 RECS -->
 <section class="sl">
-  <div class="sh"><div><div class="kk a">08 · Our recommendations</div><h2 class="a" style="--d:.08s">What we recommend, to build what you want to build</h2></div></div>
+  <div class="sh"><div><div class="kk a">09 · Our recommendations</div><h2 class="a" style="--d:.08s">What we recommend, to build what you want to build</h2></div></div>
   <div class="sbd mid">
     <div class="rl">
-      <div class="a" style="--d:.15s"><span>01</span><div><b>Build TrooCore before the screens</b><p>Decide how every data point is stored first, so later phases plug in without rework.</p></div></div>
-      <div class="a" style="--d:.2s"><span>05</span><div><b>Test every API first</b><p>Sample data and accuracy checks before building on any vendor.</p></div></div>
-      <div class="a" style="--d:.25s"><span>02</span><div><b>Make data points customisable</b><p>Markers, ranges, sources and rules managed from the admin console.</p></div></div>
-      <div class="a" style="--d:.3s"><span>06</span><div><b>Keep the tone in check</b><p>Out of range markers read as worth attention, never as alarms.</p></div></div>
+      <div class="a" style="--d:.15s"><span>01</span><div><b>Build TrooCore before the screens</b><p>Store every data point right, so later phases plug in.</p></div></div>
+      <div class="a" style="--d:.2s"><span>05</span><div><b>Test every API first</b><p>Accuracy checks on real samples before building on it.</p></div></div>
+      <div class="a" style="--d:.25s"><span>02</span><div><b>Make data points customisable</b><p>Markers, ranges and rules managed from the admin console.</p></div></div>
+      <div class="a" style="--d:.3s"><span>06</span><div><b>Keep the tone in check</b><p>Markers out of range never read as alarms.</p></div></div>
       <div class="a" style="--d:.35s"><span>03</span><div><b>Let neural networks decide</b><p>The LLM only explains and converses.</p></div></div>
-      <div class="a" style="--d:.4s"><span>07</span><div><b>Health Connect and one aggregator</b><p>Google Fit APIs are deprecated. One aggregator covers the cloud wearables.</p></div></div>
-      <div class="a" style="--d:.45s"><span>04</span><div><b>Keep every vendor replaceable</b><p>Each API behind its own connector. Change a vendor, nothing else moves.</p></div></div>
-      <div class="a" style="--d:.5s"><span>08</span><div><b>Shopify store, privacy built in</b><p>Your existing store, India hosting, consent per data type, DPDP Act aligned.</p></div></div>
+      <div class="a" style="--d:.4s"><span>07</span><div><b>Health Connect and one aggregator</b><p>Fit APIs are deprecated; one aggregator covers the rest.</p></div></div>
+      <div class="a" style="--d:.45s"><span>04</span><div><b>Keep every vendor replaceable</b><p>Each API behind its own connector, easy to swap.</p></div></div>
+      <div class="a" style="--d:.5s"><span>08</span><div><b>Shopify store, privacy built in</b><p>Your existing store, India hosting, DPDP Act aligned.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- 13 TEAM + NEXT -->
+<!-- 14 NEXT STEPS -->
 <section class="sl">
   <div class="fin">
     <div>
-      <div class="kk a">Who builds it</div>
-      <h2 class="a" style="--d:.08s">A long term technology partner, not an app vendor</h2>
-      <div class="who">
-        <div class="a" style="--d:.2s"><i>Health ML experience</i><p>Rahul, our tech lead, led backend and machine learning at <b>Twin Health</b>, working on metabolic biomarkers alongside medication data.</p></div>
-        <div class="a" style="--d:.28s"><i>Health data literacy</i><p>Our team includes formal training in <b>health informatics</b>. Markers, ranges and standards shape how we design.</p></div>
-        <div class="a" style="--d:.36s"><i>We already know Wellbeing</i><p>We already work with your team on <b>wellbeingnutrition.com</b>, and build for Titan, Tanishq, Durex and Bombay Shaving Company.</p></div>
-      </div>
+      <div class="kk a">10 · Next steps</div>
+      <h2 class="a" style="--d:.08s">What we need to get started</h2>
+      <p class="then a" style="--d:.16s;font-size:21px;max-width:560px">Once we have these, we come back with the detailed scope, costing and commercial terms.</p>
+      <div class="ctc a" style="--d:.24s"><div class="logo" style="width:40px;height:40px;font-size:17px">T</div><div><b>Troopod</b><span>nj@troopod.io</span></div></div>
     </div>
     <div class="nx">
-      <div class="kk a" style="--d:.3s">Next steps</div>
       <div class="vst">
-        <div class="a" style="--d:.38s"><span>1</span><div><b>Miro board and PRD</b><p>Access shared with tech@pushstart.in</p></div></div>
-        <div class="a" style="--d:.44s"><span>2</span><div><b>Screens and designs</b><p>Screen map and design files</p></div></div>
-        <div class="a" style="--d:.5s"><span>3</span><div><b>API list</b><p>Vendors, documentation and sample outputs</p></div></div>
-        <div class="a" style="--d:.56s"><span>4</span><div><b>Current build</b><p>A walkthrough with your tech partner</p></div></div>
+        <div class="a" style="--d:.3s"><span>1</span><div><b>Miro board and PRD</b><p>Access shared with tech@pushstart.in</p></div></div>
+        <div class="a" style="--d:.36s"><span>2</span><div><b>Screens and designs</b><p>Screen map and design files</p></div></div>
+        <div class="a" style="--d:.42s"><span>3</span><div><b>API list</b><p>Vendors, documentation and sample outputs</p></div></div>
+        <div class="a" style="--d:.48s"><span>4</span><div><b>Current build</b><p>A walkthrough with your tech partner</p></div></div>
       </div>
-      <p class="then a" style="--d:.64s">Then we come back with the detailed scope, costing and commercial terms.</p>
-      <div class="ctc a" style="--d:.7s"><div class="logo" style="width:34px;height:34px;font-size:15px">T</div><div><b>Troopod</b><span>nj@troopod.io</span></div></div>
     </div>
   </div>
 </section>
 
 </div>
-
 
 <div class="bar">
   <div class="dots" id="dots"></div>
